@@ -28,7 +28,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::where('status', '>', 0)->paginate(config('interlocution.page_size'));
+        $questions = Question::where('status', '>', 0)->paginate($this->page_size);
 
         return view('question.index', compact('questions'));
     }

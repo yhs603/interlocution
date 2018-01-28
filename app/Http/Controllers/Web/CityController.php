@@ -2,6 +2,7 @@
 
 namespace Interlocution\Http\Controllers\Web;
 
+use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 use Interlocution\Http\Controllers\Controller;
 use Interlocution\Models\City;
@@ -10,25 +11,27 @@ class CityController extends Controller
 {
     public function ajaxProvinceList()
     {
-        City::where('level', 1)->select('code', 'name')->get();
+        $province_list = City::provinceList();
+
+        return $this->success('', $province_list);
     }
 
     public function ajaxCityList($pid)
     {
-        if (!empty($pid)) {
+        if (empty($pid)) {
             return $this->error('参数错误');
         }
-        $city_list = City::where('level', 2)->where('pid',$pid)->select('code', 'name')->get();
+        $city_list = City::cityList($pid);
 
         return $this->success('', $city_list);
     }
 
     public function ajaxDistrictList($pid)
     {
-        if (!empty($pid)) {
+        if (empty($pid)) {
             return $this->error('参数错误');
         }
-        $district_list = City::where('level', 3)->where('pid',$pid)->select('code', 'name')->get();
+        $district_list = City::districtList($pid);
 
         return $this->success('', $district_list);
     }

@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Interlocution\Http\Controllers\Controller;
 use Interlocution\Models\Answer;
 use Interlocution\Models\Question;
 use Interlocution\Models\Record;
 use Interlocution\Models\Setting;
+use Interlocution\Http\Controllers\Controller;
 
 class AnswerController extends Controller
 {
@@ -164,7 +164,9 @@ class AnswerController extends Controller
     public function adopt($id)
     {
         $answer = Answer::findOrFail($id);
-        $user   = Auth::user();
+        if (!$answer)
+            return abort(404);
+        $user = Auth::user();
 
         if ($answer->adopted_at > 0) {
             return abort(500, '该回答已被采纳');

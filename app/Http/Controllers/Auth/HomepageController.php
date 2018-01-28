@@ -14,7 +14,7 @@ class HomepageController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $user_id = request()->get('user_id');
+        $user_id = request()->route()->parameter('user_id');
         $user    = User::with('userExtra')->find($user_id);
         if (!$user) {
             abort(404);
