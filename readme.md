@@ -12,7 +12,6 @@
 ```
 $ git clone git@github.com:yhs603/interlocution.git
 $ composer install
-$ 设置 `storage` 目录必须让服务器有写入权限。
 $ cp .env.example .env
 $ vim .env
     DB_*
