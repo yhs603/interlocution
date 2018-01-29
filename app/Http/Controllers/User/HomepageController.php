@@ -14,13 +14,13 @@ class HomepageController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $user_id = request()->route()->parameter('user_id');
-        $user    = User::with('userExtra')->find($user_id);
-        if (!$user) {
-            abort(404);
-        }
-        $this->user = $user;
-        view()->share(['user_info' => $user]);
+//        $user_id = request()->route()->parameter('user_id');
+//        $user    = User::with('userExtra')->find($user_id);
+//        if (!$user) {
+//            abort(404);
+//        }
+//        $this->user = $user;
+//        view()->share(['user_info' => $user]);
     }
 
     /**

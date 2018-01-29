@@ -20,6 +20,7 @@ $factory->define(\Interlocution\Models\User::class, function (Faker $faker) {
         'password'           => bcrypt('111111'),
         'remember_token'     => str_random(10),
         'confirmation_token' => $faker->uuid,
+        'status'             => $faker->numberBetween(0, 1)
     ];
 });
 

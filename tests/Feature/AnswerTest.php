@@ -37,9 +37,14 @@ class AnswerTest extends TestCase
     public function adoptAnswer()
     {
         $question = Question::where('user_id', $this->user->id)->get()->toArray();
-        $answer   = Answer::whereIn('question_id', array_column($question, 'id'))->whereNull('adopted_at')->first();
-        $response = $this->get('answer/adopt/' . $answer->id);
-        $response->assertStatus(302);
+        if ($question) {
+            $answer   = Answer::whereIn('question_id', array_column($question, 'id'))->whereNull('adopted_at')->first();
+            $response = $this->get('answer/adopt/' . $answer->id);
+            $response->assertStatus(302);
+        } else {
+            $response = $this->get('answer/adopt/');
+            $response->assertStatus(200);
+        }
     }
 
     /** @test */
@@ -47,13 +52,12 @@ class AnswerTest extends TestCase
     {
         $question = Question::where('user_id', $this->user->id)->get()->toArray();
         $answer   = Answer::whereIn('question_id', array_column($question, 'id'))->where('adopted_at', '>', 0)->first();
-
         if ($answer) {
             $response = $this->get('answer/adopt/' . $answer->id);
             $response->assertStatus(500);
         } else {
             $response = $this->get('answer/adopt/');
-            $response->assertStatus(404);
+            $response->assertStatus(200);
         }
     }
 }

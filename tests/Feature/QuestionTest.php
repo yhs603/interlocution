@@ -69,7 +69,12 @@ class QuestionTest extends TestCase
     public function editQuestionWhichIsExist()
     {
         $question = Question::where('status', 1)->where('user_id', $this->user->id)->orderBy('id', 'desc')->first();
-        $response = $this->get('question/' . $question->id . '/edit');
-        $response->assertStatus(200);
+        if ($question) {
+            $response = $this->get('question/' . $question->id . '/edit');
+            $response->assertStatus(200);
+        }else{
+            $response = $this->get('question/0/edit');
+            $response->assertStatus(404);
+        }
     }
 }
