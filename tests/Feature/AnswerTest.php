@@ -39,7 +39,7 @@ class AnswerTest extends TestCase
         $question = Question::where('user_id', $this->user->id)->get()->toArray();
         $answer   = Answer::whereIn('question_id', array_column($question, 'id'))->whereNull('adopted_at')->first();
         $response = $this->get('answer/adopt/' . $answer->id);
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 
     /** @test */

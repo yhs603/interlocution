@@ -178,8 +178,9 @@ class AnswerController extends Controller
             $answer->adopted_at = Carbon::now();
             $answer->save();
 
-            $answer->question()->status = 2;
-            $answer->question()->save();
+            $question = Question::find($answer->question_id);
+            $question->status = 2;
+            $question->save();
 
             UserExtra::where('user_id', $answer->user_id)->increment('adoptions_count');
             //增加用户对应天梯分

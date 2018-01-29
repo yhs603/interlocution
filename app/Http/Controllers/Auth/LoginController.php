@@ -64,7 +64,7 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
             if (Auth::user()->status === 0) {
-                abort(403,'账号尚未激活，请先激活');
+                abort(403, '账号尚未激活，请先激活');
             }
             //登录成功后赠送经验值
             Record::records(Auth::user(), 'login', 0, (int)Setting::getCache('experience_login'));

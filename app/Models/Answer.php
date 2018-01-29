@@ -14,7 +14,7 @@ class Answer extends Model
 
     public function question()
     {
-        return $this->hasOne('Interlocution\Models\Question');
+        return $this->hasOne('Interlocution\Models\Question', 'id', 'question_id');
     }
 
     public function user()

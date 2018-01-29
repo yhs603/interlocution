@@ -92,7 +92,7 @@ class RegisterController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
-            return NULL;
+            return null;
         }
     }
 

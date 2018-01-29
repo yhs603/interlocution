@@ -119,7 +119,7 @@ trait AjaxReturn
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function error($msg = '', $data = [], $code = NULL)
+    public function error($msg = '', $data = [], $code = null)
     {
         $res = [
             'code'    => empty($code) ? $this->error_code : $code,
