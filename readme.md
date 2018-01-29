@@ -23,8 +23,7 @@ $ php artisan migrate
 $ php artisan db:seed (默认添加了系统设置，城市表，分类，角色)
 $ 因暂时未做提供对应UI进行提问、回答等操作，请使用tinker执行factory中用户、问题、回答等数据便于测试：
     php artisan tinker
-    factory(Interlocution\Models\User::class,50)->create() 
-    factory(Interlocution\Models\Question::class,100)->create() 
+    factory(Interlocution\Models\UserExtra::class,50)->create() 
     factory(Interlocution\Models\Answer::class,100)->create() 
 ```
 

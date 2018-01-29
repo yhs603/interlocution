@@ -14,13 +14,24 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(\Interlocution\Models\User::class, function (Faker $faker) {
-
     return [
         'username'           => $faker->name,
         'email'              => $faker->unique()->safeEmail,
         'password'           => bcrypt('111111'),
         'remember_token'     => str_random(10),
         'confirmation_token' => $faker->uuid,
+    ];
+});
+
+$factory->define(\Interlocution\Models\UserExtra::class, function () {
+    $user = factory(\Interlocution\Models\User::class)->create();
+
+    return [
+        'user_id'       => $user->id,
+        'experience'    => 30,
+        'ladder'        => 0,
+        'registered_at' => \Carbon\Carbon::now(),
+        'last_login_ip' => request()->getClientIp(),
     ];
 });
 
