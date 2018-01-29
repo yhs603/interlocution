@@ -1,6 +1,6 @@
 <?php
 
-namespace Interlocution\Http\Controllers\Auth;
+namespace Interlocution\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

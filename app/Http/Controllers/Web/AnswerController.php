@@ -12,6 +12,7 @@ use Interlocution\Models\Question;
 use Interlocution\Models\Record;
 use Interlocution\Models\Setting;
 use Interlocution\Http\Controllers\Controller;
+use Interlocution\Models\UserExtra;
 
 class AnswerController extends Controller
 {
@@ -172,21 +173,20 @@ class AnswerController extends Controller
             return abort(500, '该回答已被采纳');
         }
 
-        DB::beginTransaction();
         try {
+            DB::beginTransaction();
             $answer->adopted_at = Carbon::now();
             $answer->save();
 
             $answer->question()->status = 2;
             $answer->question()->save();
 
-            $answer->user()->UserExtra()->increment('adoptions_count');
+            UserExtra::where('user_id', $answer->user_id)->increment('adoptions_count');
             //增加用户对应天梯分
             Record::records($user, 'adopt', (int)Setting::byName('ladder_adopt'), (int)Setting::byName('experience_adopt'));
             DB::commit();
 
             return redirect('/question/' . $answer->question_id);
-
         } catch (\Exception $e) {
             DB::rollBack();
             abort(500, $e->getMessage());

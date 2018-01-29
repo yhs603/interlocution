@@ -41,25 +41,25 @@ Route::Group(['namespace' => 'Web'], function () {
     });
 });
 
-Route::Group(['namespace' => 'Auth', 'middleware' => ['auth', 'user.valid']], function () {
+Route::Group(['namespace' => 'User'], function () {
     //个人首页
-    Route::get('user/{user_id}', 'HomepageController@index')->where(['user_id' => '[0-9]+'])->name('auth.homepage.index');
+    Route::get('user/{user_id}', 'HomepageController@index')->where(['user_id' => '[0-9]+'])->name('user.homepage.index');
     //我的提问
-    Route::get('user/{user_id}/questions', 'HomepageController@questions')->where(['user_id' => '[0-9]+'])->name('auth.homepage.questions');
+    Route::get('user/{user_id}/questions', 'HomepageController@questions')->where(['user_id' => '[0-9]+'])->name('user.homepage.questions');
     //我的回答
-    Route::get('user/{user_id}/answers', 'HomepageController@answers')->where(['user_id' => '[0-9]+'])->name('auth.homepage.answers');
+    Route::get('user/{user_id}/answers', 'HomepageController@answers')->where(['user_id' => '[0-9]+'])->name('user.homepage.answers');
     //我的粉丝
-    Route::get('user/{user_id}/followers', 'HomepageController@followers')->where(['user_id' => '[0-9]+'])->name('auth.homepage.followers');
+    Route::get('user/{user_id}/followers', 'HomepageController@followers')->where(['user_id' => '[0-9]+'])->name('user.homepage.followers');
     //我的关注
-    Route::get('user/{user_id}/followed/{type}', 'HomepageController@followed')->where(['user_id' => '[0-9]+', 'type' => '(questions|tags|users)'])->name('auth.homepage.followed');
+    Route::get('user/{user_id}/followed/{type}', 'HomepageController@followed')->where(['user_id' => '[0-9]+', 'type' => '(questions|tags|users)'])->name('user.homepage.followed');
     //我的收藏
-    Route::get('user/{user_id}/collected/{type}', 'HomepageController@collections')->where(['user_id' => '[0-9]+', 'type' => '(questions|articles)'])->name('auth.homepage.collections');
+    Route::get('user/{user_id}/collected/{type}', 'HomepageController@collections')->where(['user_id' => '[0-9]+', 'type' => '(questions|articles)'])->name('user.homepage.collections');
     //我的经验记录
-    Route::get('user/{user_id}/experience', 'HomepageController@experience')->where(['user_id' => '[0-9]+'])->name('auth.homepage.experience');
+    Route::get('user/{user_id}/experience', 'HomepageController@experience')->where(['user_id' => '[0-9]+'])->name('user.homepage.experience');
     //我的天梯分记录
-    Route::get('user/{user_id}/ladder', 'HomepageController@credits')->where(['user_id' => '[0-9]+'])->name('auth.homepage.ladder');
+    Route::get('user/{user_id}/ladder', 'HomepageController@credits')->where(['user_id' => '[0-9]+'])->name('user.homepage.ladder');
     //关注问题、人、标签
-    Route::get('follow/{type}/{id}', 'FollowController@follow')->where(['type' => '(question|tag|user)', 'id' => '[0-9]+'])->name('auth.follow');
+    Route::get('follow/{type}/{id}', 'FollowController@follow')->where(['type' => '(question|tag|user)', 'id' => '[0-9]+'])->name('user.follow');
     //收藏问题
-    Route::get('collect/{id}', 'CollectionController@collect')->where(['id' => '[0-9]+'])->name('auth.collect');
+    Route::get('collect/{id}', 'CollectionController@collect')->where(['id' => '[0-9]+'])->name('user.collect');
 });

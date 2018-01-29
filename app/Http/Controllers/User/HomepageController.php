@@ -1,6 +1,6 @@
 <?php
 
-namespace Interlocution\Http\Controllers\Auth;
+namespace Interlocution\Http\Controllers\User;
 
 use Interlocution\Http\Controllers\Controller;
 use Interlocution\Models\Collection;
@@ -25,8 +25,6 @@ class HomepageController extends Controller
 
     /**
      * 我的主页
-     *
-     * @param $user_id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
